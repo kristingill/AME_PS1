@@ -12,3 +12,27 @@ library(here)
 library(janitor)
 ```
 
+```{r}
+ocean_data <- read_csv(here("data", "Data.csv"))
+```
+
+```{r}
+mean_density_adult <- ocean_data[6:18, ] %>% 
+  row_to_names(1) %>% 
+  clean_names() %>% 
+  select(!c(na_2, na_3, na_4, na_5)) %>% 
+  rename(animal = na) %>% 
+  drop_na() %>% 
+  rename(confidence_interval = each_sampling_date)
+
+adult_2009 <- mean_density_adult %>% 
+  select(animal, rarotonga, aitutaki, confidence_interval)
+
+adult_2018 <- mean_density_adult %>% 
+  select(animal, rarotonga_2, aitutaki_2, confidence_interval)
+```
+
+```{r}
+mean_number_new_young <- ocean_data[25:52, ]
+```
+
