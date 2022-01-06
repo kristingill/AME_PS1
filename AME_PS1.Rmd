@@ -23,16 +23,30 @@ mean_density_adult <- ocean_data[6:18, ] %>%
   select(!c(na_2, na_3, na_4, na_5)) %>% 
   rename(animal = na) %>% 
   drop_na() %>% 
-  rename(confidence_interval = each_sampling_date)
+  rename(CI = each_sampling_date)
 
 adult_2009 <- mean_density_adult %>% 
-  select(animal, rarotonga, aitutaki, confidence_interval)
+  select(animal, rarotonga, aitutaki, CI)
 
 adult_2018 <- mean_density_adult %>% 
-  select(animal, rarotonga_2, aitutaki_2, confidence_interval)
+  select(animal, rarotonga_2, aitutaki_2, CI)
 ```
 
 ```{r}
-mean_number_new_young <- ocean_data[25:52, ]
+mean_number_new_young <- ocean_data[28:52, ] %>% 
+  row_to_names(1) %>% 
+  clean_names() %>% 
+  select(!c(na_3, na_4, na_5)) %>% 
+  rename(mircohabitat = na_2) %>% 
+  rename(fish = na) %>% 
+  rename(CI = each_sampling_date) %>% 
+  mutate(fish = row_number()) %>% 
+  drop_na() %>% 
+  mutate(fish = case_when(
+    fish == c(2,3,4,5,6) ~ "Surgeonfish",
+    fish == c(8,9,10,11,12) ~ "Coral Trout",
+    fish == c(14,15,16,17,18) ~ "Spotted Damselfish",
+    fish == c(20,21,22,23,24) ~ "Yellow Damselfish"
+  ))
 ```
 
