@@ -21,15 +21,36 @@ mean_density_adult <- ocean_data[6:18, ] %>%
   row_to_names(1) %>% 
   clean_names() %>% 
   select(!c(na_2, na_3, na_4, na_5)) %>% 
-  rename(animal = na) %>% 
+  rename(organism = na) %>% 
   drop_na() %>% 
-  rename(CI = each_sampling_date)
+  rename(CI = each_sampling_date) %>% 
+  mutate(organism = case_when(
+    organism == "Surgeonfish (herbivores)" ~ "Surgeonfish",
+    organism == "Coral Trout (predators of adult fishes)" ~ "Coral Trout",
+    organism == "Spotted Damselfish (eats zooplankton)" ~ "Spotted Damselfish",
+    organism == "Yellow Damselfish (eats zooplankton)" ~ "Yellow Damselfish",
+    TRUE ~ organism
+  ))
 
 adult_2006 <- mean_density_adult %>% 
-  select(animal, rarotonga, aitutaki, CI)
+  select(organism, rarotonga, aitutaki, CI) %>% 
+  mutate(CI = as.numeric(CI)) %>% 
+  rename(Rarotonga = rarotonga) %>% 
+  rename(Aitutaki = aitutaki) %>% 
+  mutate(Rarotonga = as.numeric(Rarotonga)) %>% 
+  mutate(Aitutaki = as.numeric(Aitutaki)) %>% 
+  mutate(year = 2006)
 
 adult_2022 <- mean_density_adult %>% 
-  select(animal, rarotonga_2, aitutaki_2, CI)
+  select(organism, rarotonga_2, aitutaki_2, CI) %>% 
+  mutate(CI = as.numeric(CI)) %>% 
+  rename(Rarotonga = rarotonga_2) %>% 
+  rename(Aitutaki = aitutaki_2) %>% 
+  mutate(Rarotonga = as.numeric(Rarotonga)) %>% 
+  mutate(Aitutaki = as.numeric(Aitutaki)) %>% 
+  mutate(year = 2022)
+
+adult <- rbind(adult_2006, adult_2022)
 ```
 
 ```{r}
@@ -54,13 +75,54 @@ young_2006 <- mean_number_new_young %>%
 
 young_2022 <- mean_number_new_young %>% 
   select(fish, microhabitat, rarotonga_2, aitutaki_2, CI) %>% 
-  rename(rarotonga = rarotonga_2) %>% 
-  rename(aitutaki = aitutaki_2)
+  rename(Rarotonga = rarotonga_2) %>% 
+  rename(Aitutaki = aitutaki_2)
 ```
 
 Question 1
 ```{r}
+# Rarotonga histograms
 
+adult_ci <- adult %>% 
+  pivot_longer(cols = c(Rarotonga, Aitutaki), names_to = "location", values_to = "mean_density") %>% 
+  mutate(ci_low = mean_density - CI) %>% 
+  mutate(ci_high = mean_density + CI)
+
+surgeonfish_adult <- adult_ci %>% 
+  filter(organism == "Surgeonfish")
+
+coral_trout_adult <- adult_ci %>% 
+  filter(organism == "Coral Trout")
+
+spotted_damselfish_adult <- adult_ci %>% 
+  filter(organism == "Spotted Damselfish")
+
+yellow_damselfish_adult <- adult_ci %>% 
+  filter(organism == "Yellow Damselfish")
+
+mounding_corals_adult <- adult_ci %>% 
+  filter(organism == "Mounding Corals")
+
+corase_corals_adult <- adult_ci %>% 
+  filter(organism == "Coarse-branching Corals")
+
+fine_corals_adult <- adult_ci %>% 
+  filter(organism == "Fine-branching Corals")
+
+sea_anemones_adult <- adult_ci %>% 
+  filter(organism == "Sea Anemones")
+
+algae_adult <- adult_ci %>% 
+  filter(organism == "Algae")
+
+# Sugeonfish
+ggplot(data = surgeonfish_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Surgeonfish") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
 Question 2
