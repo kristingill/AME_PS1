@@ -1,12 +1,17 @@
 ---
-title: "AME_PS"
+title: "Applied Marine Ecology - Problem Set 1"
 author: "Kristin, Genevieve, and Roshni"
 date: "1/6/2022"
-output: html_document
+output: 
+   html_document:
+     code_folding: hide 
+     theme: cerulean
+     toc: true
+     toc_float: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(here)
 library(janitor)
@@ -15,8 +20,12 @@ library(janitor)
 ```{r}
 ocean_data <- read_csv(here("data", "Data.csv"))
 ```
-
+## Preparing the Data
 ```{r}
+# original data
+ocean_data <- read_csv(here("data", "Data.csv"))
+
+# cleaning dataset 1
 mean_density_adult <- ocean_data[6:18, ] %>% 
   row_to_names(1) %>% 
   clean_names() %>% 
@@ -51,9 +60,16 @@ adult_2022 <- mean_density_adult %>%
   mutate(year = 2022)
 
 adult <- rbind(adult_2006, adult_2022)
+
+adult_ci <- adult %>% 
+  pivot_longer(cols = c(Rarotonga, Aitutaki), names_to = "location", values_to = "mean_density") %>% 
+  mutate(ci_low = mean_density - CI) %>% 
+  mutate(ci_high = mean_density + CI)
 ```
 
 ```{r}
+# cleaning dataset 2
+
 mean_number_new_young <- ocean_data[28:52, ] %>% 
   row_to_names(1) %>% 
   clean_names() %>% 
@@ -71,51 +87,41 @@ mean_number_new_young <- ocean_data[28:52, ] %>%
   ))
 
 young_2006 <- mean_number_new_young %>% 
-  select(fish, microhabitat, rarotonga, aitutaki, CI)
+  select(fish, microhabitat, rarotonga, aitutaki, CI) %>% 
+  rename(Rarotonga = rarotonga,
+         Aitutaki = aitutaki) %>% 
+  mutate(Rarotonga = as.numeric(Rarotonga)) %>% 
+  mutate(Aitutaki = as.numeric(Aitutaki)) %>% 
+  mutate(CI = as.numeric(CI)) %>% 
+  mutate(year = 2006)
 
 young_2022 <- mean_number_new_young %>% 
-  select(fish, microhabitat, rarotonga_2, aitutaki_2, CI) %>% 
+  select(fish, microhabitat, rarotonga_2, aitutaki_2, CI) %>%
   rename(Rarotonga = rarotonga_2) %>% 
-  rename(Aitutaki = aitutaki_2)
+  rename(Aitutaki = aitutaki_2) %>% 
+  mutate(Rarotonga = as.numeric(Rarotonga)) %>% 
+  mutate(Aitutaki = as.numeric(Aitutaki)) %>% 
+  mutate(CI = as.numeric(CI)) %>% 
+  mutate(year = 2022)
+
+young <- rbind(young_2006, young_2022)
+
+young_ci <- young %>% 
+  pivot_longer(cols = c(Rarotonga, Aitutaki), names_to = "location", values_to = "mean_number") %>% 
+  mutate(ci_low = mean_number - CI) %>% 
+  mutate(ci_high = mean_number + CI) %>% 
+  rename(organism = fish)
+
+young_ci[young_ci==0] <- NA
 ```
 
-Question 1
+## Question 1 - Adult Organisms
+
+### Sugeonfish
 ```{r}
-# Rarotonga histograms
-
-adult_ci <- adult %>% 
-  pivot_longer(cols = c(Rarotonga, Aitutaki), names_to = "location", values_to = "mean_density") %>% 
-  mutate(ci_low = mean_density - CI) %>% 
-  mutate(ci_high = mean_density + CI)
-
 surgeonfish_adult <- adult_ci %>% 
   filter(organism == "Surgeonfish")
 
-coral_trout_adult <- adult_ci %>% 
-  filter(organism == "Coral Trout")
-
-spotted_damselfish_adult <- adult_ci %>% 
-  filter(organism == "Spotted Damselfish")
-
-yellow_damselfish_adult <- adult_ci %>% 
-  filter(organism == "Yellow Damselfish")
-
-mounding_corals_adult <- adult_ci %>% 
-  filter(organism == "Mounding Corals")
-
-corase_corals_adult <- adult_ci %>% 
-  filter(organism == "Coarse-branching Corals")
-
-fine_corals_adult <- adult_ci %>% 
-  filter(organism == "Fine-branching Corals")
-
-sea_anemones_adult <- adult_ci %>% 
-  filter(organism == "Sea Anemones")
-
-algae_adult <- adult_ci %>% 
-  filter(organism == "Algae")
-
-# Sugeonfish
 ggplot(data = surgeonfish_adult)+
   geom_col(aes(x = location, y = mean_density, fill = location))+
   facet_wrap(~year) +
@@ -124,9 +130,190 @@ ggplot(data = surgeonfish_adult)+
   labs(x = "Location", y = "Mean Density of Surgeonfish") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
+From 2006 to 2022, Surgeonfish mean density has increased in Aitutaki, while it has declined in Rarotonga. The increase in the mean density of Surgeonfish for Aitutaki is not statistically significant because the mean density of one is included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Surgeonfish for Rarotonga is statistically significant. Also, the difference in the mean density of Surgeonfish between Aitutaki and Rarotonga is statistically significant. 
 
-Question 2
+### Coral Trout
 ```{r}
+coral_trout_adult <- adult_ci %>% 
+  filter(organism == "Coral Trout")
 
+ggplot(data = coral_trout_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Coral Trout") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+From 2006 to 2022, Coral Trout mean density has decreased in both Aitutaki and Rarotonga. The decrease in the mean density of Coral Trout for Aitutaki is statistically significant because the mean density of one is not included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Coral Trout for Rarotonga is also statistically significant. The difference in the mean density of Coral Trout between Aitutaki and Rarotonga is statistically significant.
+
+### Spotted Damselfish
+```{r}
+spotted_damselfish_adult <- adult_ci %>% 
+  filter(organism == "Spotted Damselfish")
+
+ggplot(data = spotted_damselfish_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Spotted Damselfish") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+From 2006 to 2022, Spotted Damselfish mean density has decreased in both Aitutaki and Rarotonga. The decrease in the mean density of Spotted Damselfish for Aitutaki is statistically significant because the mean density of one is not included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Spotted Damselfish for Rarotonga is also statistically significant. Also, the difference in the mean density of Spotted Damselfish between Aitutaki and Rarotonga is statistically significant.
+
+### Yellow Damselfish
+```{r}
+yellow_damselfish_adult <- adult_ci %>% 
+  filter(organism == "Yellow Damselfish")
+
+ggplot(data = yellow_damselfish_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Yellow Damselfish") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
+
+### Mounding Corals
+```{r}
+mounding_corals_adult <- adult_ci %>% 
+  filter(organism == "Mounding Corals")
+
+ggplot(data = mounding_corals_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Mounding Corals") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Coarse-Branching Corals
+```{r}
+coarse_corals_adult <- adult_ci %>% 
+  filter(organism == "Coarse-branching Corals")
+
+ggplot(data = coarse_corals_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Coarse Corals") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Fine-Branching Corals
+```{r}
+fine_corals_adult <- adult_ci %>% 
+  filter(organism == "Fine-branching Corals")
+
+ggplot(data = fine_corals_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Fine Corals") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Sea Anemones
+```{r}
+sea_anemones_adult <- adult_ci %>% 
+  filter(organism == "Sea Anemones")
+
+ggplot(data = sea_anemones_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Sea Anemones") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Algae
+```{r}
+algae_adult <- adult_ci %>% 
+  filter(organism == "Algae")
+
+ggplot(data = algae_adult)+
+  geom_col(aes(x = location, y = mean_density, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Density of Algae") +
+  geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+## Question 2 - Young Recruits
+
+### Surgeonfish
+```{r}
+surgeonfish_young <- young_ci %>% 
+  filter(organism == "Surgeonfish") %>% 
+  drop_na()
+
+ggplot(data = surgeonfish_young)+
+  geom_col(aes(x = location, y = mean_number, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Number of Surgeonfish") +
+  geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Coral Trout
+```{r}
+coral_trout_young <- young_ci %>% 
+  filter(organism == "Coral Trout") %>% 
+  drop_na()
+
+ggplot(data = coral_trout_young)+
+  geom_col(aes(x = location, y = mean_number, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Number of Coral Trout") +
+  geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### spotted Damselfish
+```{r}
+spotted_damselfish_young <- young_ci %>% 
+  filter(organism == "Spotted Damselfish") %>% 
+  drop_na()
+
+ggplot(data = spotted_damselfish_young)+
+  geom_col(aes(x = location, y = mean_number, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Number of Spotted Damselfish") +
+  geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+### Yellow Damselfish
+```{r}
+yellow_damselfish_young <- young_ci %>% 
+  filter(organism == "Yellow Damselfish") %>% 
+  drop_na()
+
+ggplot(data = yellow_damselfish_young)+
+  geom_col(aes(x = location, y = mean_number, fill = location))+
+  facet_wrap(~year) +
+  theme_minimal() +
+  theme(legend.position ="none") +
+  labs(x = "Location", y = "Mean Number of Yellow Damselfish") +
+  geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
+```
+
+
+## Question 3
+
+## Question 4
+
+## Question 5
+
+## Question 6
