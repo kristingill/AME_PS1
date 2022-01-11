@@ -308,8 +308,33 @@ ggplot(data = yellow_damselfish_young)+
 
 
 ## Question 3
+```{r}
+# Calculate the density of fish recruits per 100 m2 area of reef
+
+young_density_100m2 <- young_ci %>% 
+  mutate(year = as.character(year))
+
+# Convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+young_density_100m2$mean_number_new <- young_density_100m2$mean_number*young_density_100m2$mean_number*100
+```
+
+### Surgeonfish
+```{r}
+young_density_surgeonfish <- young_density_100m2 %>% 
+  filter(organism == "Surgeonfish")
+
+ggplot(data = young_density_surgeonfish, aes(x = location, y = mean_number_new, color = year))+
+  geom_point()+
+  theme_minimal()+
+  labs(x = "Location", y = "Mean Density of Surgeonfish per 100m^2 reef")
+```
+
 
 ## Question 4
+```{r}
+
+```
+
 
 
 
