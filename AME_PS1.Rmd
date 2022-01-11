@@ -130,7 +130,6 @@ ggplot(data = surgeonfish_adult)+
   labs(x = "Location", y = "Mean Density of Surgeonfish") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
-From 2006 to 2022, Surgeonfish mean density has increased in Aitutaki, while it has declined in Rarotonga. The increase in the mean density of Surgeonfish for Aitutaki is not statistically significant because the mean density of one is included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Surgeonfish for Rarotonga is statistically significant. Also, the difference in the mean density of Surgeonfish between Aitutaki and Rarotonga is statistically significant. 
 
 ### Coral Trout
 ```{r}
@@ -145,7 +144,6 @@ ggplot(data = coral_trout_adult)+
   labs(x = "Location", y = "Mean Density of Coral Trout") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
-From 2006 to 2022, Coral Trout mean density has decreased in both Aitutaki and Rarotonga. The decrease in the mean density of Coral Trout for Aitutaki is statistically significant because the mean density of one is not included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Coral Trout for Rarotonga is also statistically significant. The difference in the mean density of Coral Trout between Aitutaki and Rarotonga is statistically significant.
 
 ### Spotted Damselfish
 ```{r}
@@ -160,7 +158,6 @@ ggplot(data = spotted_damselfish_adult)+
   labs(x = "Location", y = "Mean Density of Spotted Damselfish") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
-From 2006 to 2022, Spotted Damselfish mean density has decreased in both Aitutaki and Rarotonga. The decrease in the mean density of Spotted Damselfish for Aitutaki is statistically significant because the mean density of one is not included in the 95% confidence interval (CI) of the other. The decrease in the mean density of Spotted Damselfish for Rarotonga is also statistically significant. Also, the difference in the mean density of Spotted Damselfish between Aitutaki and Rarotonga is statistically significant.
 
 ### Yellow Damselfish
 ```{r}
@@ -260,7 +257,7 @@ ggplot(data = surgeonfish_young)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Number of Surgeonfish") +
+  labs(x = "Location", y = "Mean Density of Surgeonfish") +
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
@@ -275,11 +272,11 @@ ggplot(data = coral_trout_young)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Number of Coral Trout") +
+  labs(x = "Location", y = "Mean Density of Coral Trout") +
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
-### spotted Damselfish
+### Spotted Damselfish
 ```{r}
 spotted_damselfish_young <- young_ci %>% 
   filter(organism == "Spotted Damselfish") %>% 
@@ -290,7 +287,7 @@ ggplot(data = spotted_damselfish_young)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Number of Spotted Damselfish") +
+  labs(x = "Location", y = "Mean Density of Spotted Damselfish") +
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
@@ -305,7 +302,7 @@ ggplot(data = yellow_damselfish_young)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Number of Yellow Damselfish") +
+  labs(x = "Location", y = "Mean Density of Yellow Damselfish") +
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
