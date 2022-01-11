@@ -1,0 +1,81 @@
+﻿organism,CI,year,location,mean_density,habitat,habitat_area_m2_per_100m2,density_per_habitat
+Surgeonfish,32,2006,Rarotonga,250,Mounding Corals,19.5,12.82051282
+Surgeonfish,32,2006,Rarotonga,250,Coarse-branching Corals,2.8,89.28571429
+Surgeonfish,32,2006,Rarotonga,250,Fine-branching Corals,2.2,113.6363636
+Surgeonfish,32,2006,Rarotonga,250,Sea Anemones,1.0,250
+Surgeonfish,32,2006,Rarotonga,250,Algae,1.7,147.0588235
+Surgeonfish,32,2006,Aitutaki,360,Mounding Corals,14.5,24.82758621
+Surgeonfish,32,2006,Aitutaki,360,Coarse-branching Corals,3.2,112.5
+Surgeonfish,32,2006,Aitutaki,360,Fine-branching Corals,2.5,144
+Surgeonfish,32,2006,Aitutaki,360,Sea Anemones,1.8,200
+Surgeonfish,32,2006,Aitutaki,360,Algae,0.8,450
+Coral Trout,21,2006,Rarotonga,120,Mounding Corals,19.5,6.153846154
+Coral Trout,21,2006,Rarotonga,120,Coarse-branching Corals,2.8,42.85714286
+Coral Trout,21,2006,Rarotonga,120,Fine-branching Corals,2.2,54.54545455
+Coral Trout,21,2006,Rarotonga,120,Sea Anemones,1.0,120
+Coral Trout,21,2006,Rarotonga,120,Algae,1.7,70.58823529
+Coral Trout,21,2006,Aitutaki,170,Mounding Corals,14.5,11.72413793
+Coral Trout,21,2006,Aitutaki,170,Coarse-branching Corals,3.2,53.125
+Coral Trout,21,2006,Aitutaki,170,Fine-branching Corals,2.5,68
+Coral Trout,21,2006,Aitutaki,170,Sea Anemones,1.8,94.44444444
+Coral Trout,21,2006,Aitutaki,170,Algae,0.8,212.5
+Spotted Damselfish,47,2006,Rarotonga,520,Mounding Corals,19.5,26.66666667
+Spotted Damselfish,47,2006,Rarotonga,520,Coarse-branching Corals,2.8,185.7142857
+Spotted Damselfish,47,2006,Rarotonga,520,Fine-branching Corals,2.2,236.3636364
+Spotted Damselfish,47,2006,Rarotonga,520,Sea Anemones,1.0,520
+Spotted Damselfish,47,2006,Rarotonga,520,Algae,1.7,305.8823529
+Spotted Damselfish,47,2006,Aitutaki,910,Mounding Corals,14.5,62.75862069
+Spotted Damselfish,47,2006,Aitutaki,910,Coarse-branching Corals,3.2,284.375
+Spotted Damselfish,47,2006,Aitutaki,910,Fine-branching Corals,2.5,364
+Spotted Damselfish,47,2006,Aitutaki,910,Sea Anemones,1.8,505.5555556
+Spotted Damselfish,47,2006,Aitutaki,910,Algae,0.8,1137.5
+Yellow Damselfish,15,2006,Rarotonga,32,Mounding Corals,19.5,1.641025641
+Yellow Damselfish,15,2006,Rarotonga,32,Coarse-branching Corals,2.8,11.42857143
+Yellow Damselfish,15,2006,Rarotonga,32,Fine-branching Corals,2.2,14.54545455
+Yellow Damselfish,15,2006,Rarotonga,32,Sea Anemones,1.0,32
+Yellow Damselfish,15,2006,Rarotonga,32,Algae,1.7,18.82352941
+Coral Trout,15,2006,Aitutaki,36,Mounding Corals,14.5,2.482758621
+Coral Trout,15,2006,Aitutaki,36,Coarse-branching Corals,3.2,11.25
+Coral Trout,15,2006,Aitutaki,36,Fine-branching Corals,2.5,14.4
+Coral Trout,15,2006,Aitutaki,36,Sea Anemones,1.8,20
+Coral Trout,15,2006,Aitutaki,36,Algae,0.8,45
+Surgeonfish,32,2022,Rarotonga,20,Mounding Corals,18.0,1.111111111
+Surgeonfish,32,2022,Rarotonga,20,Coarse-branching Corals,0.7,28.57142857
+Surgeonfish,32,2022,Rarotonga,20,Fine-branching Corals,0.30,66.66666667
+Surgeonfish,32,2022,Rarotonga,20,Sea Anemones,0.5,40
+Surgeonfish,32,2022,Rarotonga,20,Algae,5.5,3.636363636
+Surgeonfish,32,2022,Aitutaki,390,Mounding Corals,15.9,24.52830189
+Surgeonfish,32,2022,Aitutaki,390,Coarse-branching Corals,2.4,162.5
+Surgeonfish,32,2022,Aitutaki,390,Fine-branching Corals,3.2,121.875
+Surgeonfish,32,2022,Aitutaki,390,Sea Anemones,0.9,433.3333333
+Surgeonfish,32,2022,Aitutaki,390,Algae,0.4,975
+Coral Trout,21,2022,Rarotonga,4,Mounding Corals,18.0,0.222222222
+Coral Trout,21,2022,Rarotonga,4,Coarse-branching Corals,0.7,5.714285714
+Coral Trout,21,2022,Rarotonga,4,Fine-branching Corals,0.30,13.33333333
+Coral Trout,21,2022,Rarotonga,4,Sea Anemones,0.5,8
+Coral Trout,21,2022,Rarotonga,4,Algae,5.5,0.727272727
+Coral Trout,21,2022,Aitutaki,40,Mounding Corals,15.9,2.51572327
+Coral Trout,21,2022,Aitutaki,40,Coarse-branching Corals,2.4,16.66666667
+Coral Trout,21,2022,Aitutaki,40,Fine-branching Corals,3.2,12.5
+Coral Trout,21,2022,Aitutaki,40,Sea Anemones,0.9,44.44444444
+Coral Trout,21,2022,Aitutaki,40,Algae,0.4,100
+Spotted Damselfish,47,2022,Rarotonga,19,Mounding Corals,18.0,1.055555556
+Spotted Damselfish,47,2022,Rarotonga,19,Coarse-branching Corals,0.7,27.14285714
+Spotted Damselfish,47,2022,Rarotonga,19,Fine-branching Corals,0.30,63.33333333
+Spotted Damselfish,47,2022,Rarotonga,19,Sea Anemones,0.5,38
+Spotted Damselfish,47,2022,Rarotonga,19,Algae,5.5,3.454545455
+Spotted Damselfish,47,2022,Aitutaki,257,Mounding Corals,15.9,16.16352201
+Spotted Damselfish,47,2022,Aitutaki,257,Coarse-branching Corals,2.4,107.0833333
+Spotted Damselfish,47,2022,Aitutaki,257,Fine-branching Corals,3.2,80.3125
+Spotted Damselfish,47,2022,Aitutaki,257,Sea Anemones,0.9,285.5555556
+Spotted Damselfish,47,2022,Aitutaki,257,Algae,0.4,642.5
+Yellow Damselfish,15,2022,Rarotonga,90,Mounding Corals,18.0,5
+Yellow Damselfish,15,2022,Rarotonga,90,Coarse-branching Corals,0.7,128.5714286
+Yellow Damselfish,15,2022,Rarotonga,90,Fine-branching Corals,0.30,300
+Yellow Damselfish,15,2022,Rarotonga,90,Sea Anemones,0.5,180
+Yellow Damselfish,15,2022,Rarotonga,90,Algae,5.5,16.36363636
+Yellow Damselfish,15,2022,Aitutaki,80,Mounding Corals,15.9,5.031446541
+Yellow Damselfish,15,2022,Aitutaki,80,Coarse-branching Corals,2.4,33.33333333
+Yellow Damselfish,15,2022,Aitutaki,80,Fine-branching Corals,3.2,25
+Yellow Damselfish,15,2022,Aitutaki,80,Sea Anemones,0.9,88.88888889
+Yellow Damselfish,15,2022,Aitutaki,80,Algae,0.4,200
