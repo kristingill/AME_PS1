@@ -314,6 +314,36 @@ ggplot(data = yellow_damselfish_young)+
 
 ## Question 4
 
+
+
+
+
+
+
+
 ## Question 5
 
+```{r}
+
+```
+
+
+
+
+
+
 ## Question 6
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
