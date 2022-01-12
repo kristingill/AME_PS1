@@ -324,29 +324,235 @@ surgeonfish_adult_100m2 <- surgeonfish_adult %>%
 #merge young and adult data frames
 young_old_surgeonfish <- merge(surgeonfish_adult_100m2, surgeonfish_young_100m2, by = c("year", "location", "organism"))
 
-# calculate r^2 value
+#calculate r^2 value
 r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
 summary(r2_surgeonfish)$r.squared
 
 #save csv (to double check r^2 value in excel)
 #write.csv(young_old_surgeonfish, here("outputs", "young_old_surgeonfish2.csv"))
+
+#CORAL TROUT
+#convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+ct_young_100m2 <- coral_trout_young %>%
+  mutate(mean_density_young = mean_number*mean_number*100) %>% 
+  select(-c(ci_low, ci_high, CI, microhabitat, mean_number))
+
+#remove variables from adult surgeonfish data frame
+ct_adult_100m2 <- coral_trout_adult %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge young and adult data frames
+young_old_ct <- merge(ct_adult_100m2, ct_young_100m2, by = c("year", "location", "organism"))
+
+#calculate r^2 value
+r2_ct <- lm(mean_density~mean_density_young, data=young_old_ct)
+summary(r2_ct)$r.squared
+
+#SPOTTED DAMSELFISH
+#convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+sd_young_100m2 <- spotted_damselfish_young %>%
+  mutate(mean_density_young = mean_number*mean_number*100) %>% 
+  select(-c(ci_low, ci_high, CI, microhabitat, mean_number))
+
+#remove variables from adult surgeonfish data frame
+sd_adult_100m2 <- spotted_damselfish_adult %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge young and adult data frames
+young_old_sd <- merge(sd_adult_100m2, sd_young_100m2, by = c("year", "location", "organism"))
+
+#calculate r^2 value
+r2_sd <- lm(mean_density~mean_density_young, data=young_old_sd)
+summary(r2_sd)$r.squared
+
+#YELLOW DAMSELFISH
+#convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+yd_young_100m2 <- yellow_damselfish_young %>%
+  mutate(mean_density_young = mean_number*mean_number*100) %>% 
+  select(-c(ci_low, ci_high, CI, microhabitat, mean_number))
+
+#remove variables from adult surgeonfish data frame
+yd_adult_100m2 <- yellow_damselfish_adult %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge young and adult data frames
+young_old_yd <- merge(yd_adult_100m2, yd_young_100m2, by = c("year", "location", "organism"))
+
+#calculate r^2 value
+r2_yd <- lm(mean_density~mean_density_young, data=young_old_yd)
+summary(r2_yd)$r.squared
 ```
 
-### Surgeonfish Plot
+### Q3 Surgeonfish Plot
 ```{r}
 #plot surgeonfish young vs old with R^2 value
 ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
   geom_point()+
   geom_smooth(method = "lm", 
               se = FALSE, 
-              color = "gray30") + 
-  theme_bw() +
-  annotate("text", x = 100000, y = 350, label = expression(~R^2~"= 0.404"))
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 105000, y = 380, label = expression(~R^2~"= 0.404"))+
+  labs(x = "Mean Density of Young Surgeonfish",
+       y = "Mean Density of Adult Surgeonfish",
+       title = expression("Mean Density of Young and Adult Surgeonfish Per 100"~m^2~"Area of Reef"))
 ```
+### Q3 Coral Trout Plot
+```{r}
+#plot coral trout young vs old with R^2 value
+ggplot(data = young_old_ct, aes(mean_density_young, mean_density))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 10000, y = 180, label = expression(~R^2~"= 0.876"))+
+  labs(x = "Mean Density of Young Coral Trout",
+       y = "Mean Density of Adult Coral Trout",
+       title = expression("Mean Density of Young and Adult Coral Trout Per 100"~m^2~"Area of Reef"))
+```
+
+### Q3 Spotted Damselfish Plot
+```{r}
+#plot spotted damselfish young vs old with R^2 value
+ggplot(data = young_old_sd, aes(mean_density_young, mean_density))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 21700, y = 870, label = expression(~R^2~"= 0.041"))+
+  labs(x = "Mean Density of Young Spotted Damselfish",
+       y = "Mean Density of Adult Spotted Damselfish",
+       title = expression("Mean Density of Young and Adult Spotted Damselfish Per 100"~m^2~"Area of Reef"))
+```
+
+### Q3 Yellow Damselfish Plot
+```{r}
+#plot yellow damselfish young vs old with R^2 value
+ggplot(data = young_old_yd, aes(mean_density_young, mean_density))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 150000, y = 90, label = expression(~R^2~"= 0.491"))+
+  labs(x = "Mean Density of Young Yellow Damselfish",
+       y = "Mean Density of Adult Yellow Damselfish",
+       title = expression("Mean Density of Young and Adult Yellow Damselfish Per 100"~m^2~"Area of Reef"))
+```
+
 
 ## Question 4
 ```{r}
+#for each species make a scatterplot of the relationship between density of adults and density of microhabitat used by their young
+
+#SURGEONFISH - density of adults and density of fine-branching coral
+fbcoral_density <- adult_ci %>% 
+  filter(organism == "Fine-branching Corals") %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge adult surgeonfish density and fine-branching corals
+surgeonfish_fbcoral <- merge(surgeonfish_adult_100m2, fbcoral_density, by = c("year", "location"))
+
+#calculate r^2 value
+r2_surgeonfish_fbcoral <- lm(mean_density.x~mean_density.y, data=surgeonfish_fbcoral)
+summary(r2_surgeonfish_fbcoral)$r.squared
+
+#CORAL TROUT - density of adults and density of course-branching coral
+cbcoral_density <- adult_ci %>% 
+  filter(organism == "Coarse-branching Corals") %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge adult coral trout density and fine-branching corals
+ct_cbcoral <- merge(coral_trout_adult, cbcoral_density, by = c("year", "location"))
+
+#calculate r^2 value
+r2_ct_cbcoral <- lm(mean_density.x~mean_density.y, data=ct_cbcoral)
+summary(r2_ct_cbcoral)$r.squared
+
+#SPOTTED DAMSELFISH - density of adults and density of sea anemones
+sea_anemone_density <- adult_ci %>% 
+  filter(organism == "Sea Anemones") %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge adult spotted damselfish density and sea anemones
+sd_sea_anemone <- merge(spotted_damselfish_adult, sea_anemone_density, by = c("year", "location"))
+
+#calculate r^2 value
+r2_sd_sea_anemone <- lm(mean_density.x~mean_density.y, data=sd_sea_anemone)
+summary(r2_sd_sea_anemone)$r.squared
+
+#YELLOW DAMSELFISH - density of adults and density of mounding coral
+mounding_coral_density <- adult_ci %>% 
+  filter(organism == "Mounding Corals") %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge adult yellow damselfish density and mounding coral
+yd_mounding_coral <- merge(yellow_damselfish_adult, mounding_coral_density, by = c("year", "location"))
+
+#calculate r^2 value
+r2_yd_mounding_coral <- lm(mean_density.x~mean_density.y, data=yd_mounding_coral)
+summary(r2_yd_mounding_coral)$r.squared
 ```
+
+### Q4 Surgeonfish Plot
+```{r}
+ggplot(data = surgeonfish_fbcoral, aes(x = mean_density.x, y = mean_density.y))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 310, y = 3.1, label = expression(~R^2~"= 0.965"))+
+  labs(x = "Mean Density of Adult Surgeonfish",
+       y = "Mean Density of Fine-branching Corals",
+       title = expression("Mean Density of Adult Surgeonfish \nand Fine-branching Corals Per 100"~m^2~"Area of Reef"))
+```
+
+### Q4 Coral Trout Plot
+```{r}
+ggplot(data = ct_cbcoral, aes(x = mean_density.x, y = mean_density.y))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 120, y = 3.3, label = expression(~R^2~"= 0.776"))+
+  labs(x = "Mean Density of Adult Coral Trout",
+       y = "Mean Density of Course-branching Corals",
+       title = expression("Mean Density of Adult Coral Trout \nand Course-branching Corals Per 100"~m^2~"Area of Reef"))
+```
+### Q4 Spotted Damselfish Plot
+```{r}
+ggplot(data = sd_sea_anemone, aes(x = mean_density.x, y = mean_density.y))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 750, y = 1.75, label = expression(~R^2~"= 0.948"))+
+  labs(x = "Mean Density of Adult Spotted Damselfish",
+       y = "Mean Density of Sea Anemone",
+       title = expression("Mean Density of Adult Spotted \nDamselfish and Sea Anemone Per 100"~m^2~"Area of Reef"))
+```
+
+### Q4 Yellow Damselfish Plot
+```{r}
+ggplot(data = yd_mounding_coral, aes(x = mean_density.x, y = mean_density.y))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30")+ 
+  theme_bw()+
+  annotate("text", x = 85, y = 19.2, label = expression(~R^2~"= 0.000107"))+
+  labs(x = "Mean Density of Adult Yellow Damselfish",
+       y = "Mean Density of Mounding Corals",
+       title = expression("Mean Density of Adult Yellow \nDamselfish and Mounding Corals Per 100"~m^2~"Area of Reef"))
+
+
+```
+
 
 ## Question 5
 
