@@ -20,6 +20,7 @@ library(janitor)
 ```{r}
 ocean_data <- read_csv(here("data", "Data.csv"))
 ```
+
 ## Preparing the Data
 ```{r}
 # original data
@@ -172,7 +173,6 @@ ggplot(data = yellow_damselfish_adult)+
   labs(x = "Location", y = "Mean Density of Yellow Damselfish") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
-
 
 ### Mounding Corals
 ```{r}
@@ -348,6 +348,12 @@ ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
 ```{r}
 ```
 
+
+
+
+
+
+
 ## Question 5
 
 ```{r}
@@ -361,7 +367,7 @@ adult_microhabitat_2 <- read_csv(here("data", "adult_density_young_microhabitat_
 
 ### Surgeonfish 
 ```{r}
-surgeonfish_adult_microhabitat <- adult_microhabitat %>% 
+surgeonfish_adult_microhabitat <- adult_microhabitat_2 %>% 
   filter(organism == "Surgeonfish")
 
 ggplot(data = surgeonfish_adult_microhabitat) + 
@@ -413,5 +419,102 @@ ggplot(data = yellow_damselfish_adult_microhabitat) +
   labs(x = "Location", y = "Mean Density of Yellow Damselfish Per Mounding Coral Area") +
   theme(legend.position ="none")
 ```
+
+
+## Question 6 
+
+For each pair of fish species, make an ‘XY(Scatter)’ plot (with linear trend line and R-square value) for the densities of adults (i.e., plot the densities of one species against another; you need to make 6 different graphs). Which show patterns and what are those trends?
+
+### Surgeonfish vs Coral Trout 
+```{r}
+
+
+
+
+
+r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
+summary(r2_surgeonfish)$r.squared
+
+
+ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30") + 
+  theme_bw() +
+  annotate("text", x = 100000, y = 350, label = expression(~R^2~"= 0.404"))
+  
+```
+
+
+### Surgeonfish vs. Spotted Damselfish 
+```{r}
+
+```
+
+
+### Surgeonfish vs. Yellow Damselfish 
+```{r}
+
+```
+
+
+### Coral Trout vs. Spotted Damselfish
+```{r}
+
+```
+
+
+### Coral Trout vs. Yellow Damselfish
+```{r}
+
+```
+
+
+### Spotted Damselfish vs. Yellow Damselfish
+```{r}
+
+```
+
+
+
+
+
+# calculate r^2 value
+r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
+summary(r2_surgeonfish)$r.squared
+
+#save csv (to double check r^2 value in excel)
+#write.csv(young_old_surgeonfish, here("outputs", "young_old_surgeonfish2.csv"))
+```
+
+### Surgeonfish Plot
+```{r}
+#plot surgeonfish young vs old with R^2 value
+
+r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
+summary(r2_surgeonfish)$r.squared
+
+
+ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
+  geom_point()+
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30") + 
+  theme_bw() +
+  annotate("text", x = 100000, y = 350, label = expression(~R^2~"= 0.404"))
+  
+  
+```
+
+
+
+
+
+
+
+
+
+
 
 
