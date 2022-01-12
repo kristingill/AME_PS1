@@ -360,7 +360,6 @@ ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
 
 ## Question 5
 
-
 ```{r}
 adult_microhabitat_old <- read_csv(here("data", "adult_microhabitat.csv"))
 
@@ -410,6 +409,7 @@ ggplot(data = spotted_damselfish_adult_microhabitat) +
   labs(x = "Location", y = "Mean Density of Spotted Damselfish Per Sea Anemones Coral Area") +
   theme(legend.position ="none")
 ```
+
 
 ### Yellow Damselfish
 ```{r}
