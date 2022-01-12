@@ -334,7 +334,7 @@ summary(r2_surgeonfish)$r.squared
 
 ### Surgeonfish Plot
 ```{r}
-#plot surgeonfish young vs old with R^2 value 
+#plot surgeonfish young vs old with R^2 value
 ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
   geom_point()+
   geom_smooth(method = "lm", 
