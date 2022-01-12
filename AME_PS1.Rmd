@@ -353,19 +353,54 @@ ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
 
 
 
+<<<<<<< HEAD
+=======
+adult_microhabitat <- read_csv(here("data", "adult_density_young_microhabitat.csv"))
+
+adult_microhabitat_2 <- read_csv(here("data", "adult_density_young_microhabitat_2.csv"))
+```
+>>>>>>> 5a2c8e1184428163d3f0b35c4fe627158374f776
 
 
 
 
+<<<<<<< HEAD
+=======
+### Coral Trout
+```{r}
+coral_trout_adult_microhabitat <- adult_microhabitat_2 %>% 
+  filter(organism == "CoralTrout")
+
+ggplot(data = coral_trout_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Coral Trout Per Coarse-Branching Coral Area") +
+  theme(legend.position ="none")
+```
+>>>>>>> 5a2c8e1184428163d3f0b35c4fe627158374f776
 
 ## Question 5
 
 ```{r}
+<<<<<<< HEAD
 adult_microhabitat <- read_csv(here("data", "adult_microhabitat.csv"))
+=======
+spotted_damselfish_adult_microhabitat <- adult_microhabitat_2 %>% 
+  filter(organism == "SpottedDamselfish")
+
+ggplot(data = spotted_damselfish_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Spotted Damselfish Per Sea Anemones Coral Area") +
+  theme(legend.position ="none")
+>>>>>>> 5a2c8e1184428163d3f0b35c4fe627158374f776
 ```
 
 ### Surgeonfish 
 ```{r}
+<<<<<<< HEAD
 
 surgeonfish_adult_microhabitat <- adult_microhabitat %>% 
   filter(organism == "Surgeonfish")
@@ -375,6 +410,24 @@ ggplot(data = surgeonfish_adult_microhabitat) +
   facet_wrap(~year) +
   theme_minimal() +
   labs(x = "Location", y = "Mean Density of Surgeonfish Per Microhabitat Area")
+=======
+yellow_damselfish_adult_microhabitat <- adult_microhabitat_2 %>% 
+  filter(organism == "YellowDamselfish")
+
+ggplot(data = yellow_damselfish_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Yellow Damselfish Per Mounding Coral Area") +
+  theme(legend.position ="none")
+```
+
+
+
+
+
+
+>>>>>>> 5a2c8e1184428163d3f0b35c4fe627158374f776
 
 ```
 
