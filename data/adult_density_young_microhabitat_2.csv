@@ -1,0 +1,17 @@
+﻿organism,CI,year,location,mean_density,ci_low,ci_high,young_microhabitat,microhabitat_density_m2_per_100m2,adult_density_per_microhabitat
+Surgeonfish,32,2006,Rarotonga,250,218,282,Fine-branching Coral,2.2,113.6363636
+Surgeonfish,32,2006,Aitutaki,360,328,392,Fine-branching Coral,2.5,144
+CoralTrout,21,2006,Rarotonga,120,99,141,Coarse-branching Coral,2.8,42.85714286
+CoralTrout,21,2006,Aitutaki,170,149,191,Coarse-branching Coral,3.2,53.125
+SpottedDamselfish,47,2006,Rarotonga,520,473,567,SeaAnemones,1,520
+SpottedDamselfish,47,2006,Aitutaki,910,863,957,SeaAnemones,1.8,505.5555556
+YellowDamselfish,15,2006,Rarotonga,32,17,47,Mounding Coral,19.5,1.641025641
+YellowDamselfish,15,2006,Aitutaki,36,21,51,Mounding Coral,14.5,2.482758621
+Surgeonfish,32,2022,Rarotonga,20,-12,52,Fine-branching Coral,0.3,66.66666667
+Surgeonfish,32,2022,Aitutaki,390,358,422,Fine-branching Coral,3.2,121.875
+CoralTrout,21,2022,Rarotonga,4,-17,25,Coarse-branching Coral,0.7,5.714285714
+CoralTrout,21,2022,Aitutaki,40,19,61,Coarse-branching Coral,2.4,16.66666667
+SpottedDamselfish,47,2022,Rarotonga,19,-28,66,SeaAnemones,0.5,38
+SpottedDamselfish,47,2022,Aitutaki,257,210,304,SeaAnemones,0.9,285.5555556
+YellowDamselfish,15,2022,Rarotonga,90,75,105,Mounding Coral,18,5
+YellowDamselfish,15,2022,Aitutaki,80,65,95,Mounding Coral,15.9,5.031446541
