@@ -198,7 +198,7 @@ ggplot(data = coarse_corals_adult)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Density of Coarse Corals") +
+  labs(x = "Location", y = "Area (m^2) of Coarse Corals per 100m^2 of Reef") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
@@ -212,7 +212,7 @@ ggplot(data = fine_corals_adult)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Density of Fine Corals") +
+  labs(x = "Location", y = "Area (m^2) of Fine Corals per 100m^2 of Reef") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
@@ -226,7 +226,7 @@ ggplot(data = sea_anemones_adult)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Density of Sea Anemones") +
+  labs(x = "Location", y = "Area (m^2) of Sea Anemones per 100m^2 of Reef") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
@@ -240,7 +240,7 @@ ggplot(data = algae_adult)+
   facet_wrap(~year) +
   theme_minimal() +
   theme(legend.position ="none") +
-  labs(x = "Location", y = "Mean Density of Algae") +
+  labs(x = "Location", y = "Area (m^2) of Algae per 100m^2 of Reef") +
   geom_errorbar(aes(x = location, y = mean_density, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
