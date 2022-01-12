@@ -336,32 +336,70 @@ ggplot(data = young_density_surgeonfish, aes(x = location, y = mean_number_new, 
 ```
 
 
-
-
-
-
-
-
-
 ## Question 5
 
 ```{r}
-adult_microhabitat <- read_csv(here("data", "adult_microhabitat.csv"))
+adult_microhabitat_old <- read_csv(here("data", "adult_microhabitat.csv"))
+
+adult_microhabitat <- read_csv(here("data", "adult_density_young_microhabitat.csv"))
 ```
 
 ### Surgeonfish 
 ```{r}
-
 surgeonfish_adult_microhabitat <- adult_microhabitat %>% 
   filter(organism == "Surgeonfish")
 
 ggplot(data = surgeonfish_adult_microhabitat) + 
-  geom_col(aes(x = location, y = density_per_habitat, fill = habitat)) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
   facet_wrap(~year) +
   theme_minimal() +
-  labs(x = "Location", y = "Mean Density of Surgeonfish Per Microhabitat Area")
+  labs(x = "Location", y = "Mean Density of Surgeonfish Per Fine-Branching Coral Area") +
+  theme(legend.position ="none")
+```
+
+
+### Coral Trout
+```{r}
+coral_trout_adult_microhabitat <- adult_microhabitat %>% 
+  filter(organism == "Coral Trout")
+
+ggplot(data = coraltrout_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Coral Trout Per Fine-Branching Coral Area") +
+  theme(legend.position ="none")
+```
+
+
+### Spotted Damselfish
+```{r}
+spotted_damselfish_adult_microhabitat <- adult_microhabitat %>% 
+  filter(organism == "Spotted Damselfish")
+
+ggplot(data = surgeonfish_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Surgeonfish Per Fine-Branching Coral Area") +
+  theme(legend.position ="none")
+```
+
+
+
+
+
+### Yellow Damselfish
+```{r}
 
 ```
+
+
+
+
+
+
+
 
 
 ## Question 6
