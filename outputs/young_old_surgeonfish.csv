@@ -1,0 +1,5 @@
+"","year","organism.x","CI.x","location.x","mean_density","ci_low.x","ci_high.x","organism.y","microhabitat","CI.y","location.y","mean_number","ci_low.y","ci_high.y","mean_density_young"
+"1",2006,"Surgeonfish",32,"Rarotonga",250,218,282,"Surgeonfish","Fine-branching Coral",10,"Rarotonga",19.5,9.5,29.5,38025
+"2",2006,"Surgeonfish",32,"Aitutaki",360,328,392,"Surgeonfish","Fine-branching Coral",10,"Rarotonga",19.5,9.5,29.5,38025
+"3",2022,"Surgeonfish",32,"Rarotonga",20,-12,52,"Surgeonfish","Fine-branching Coral",10,"Rarotonga",33,23,43,108900
+"4",2022,"Surgeonfish",32,"Aitutaki",390,358,422,"Surgeonfish","Fine-branching Coral",10,"Rarotonga",33,23,43,108900
