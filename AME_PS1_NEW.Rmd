@@ -246,7 +246,7 @@ ggplot(data = algae_adult)+
 
 ## Question 2 - Young Recruits
 
-### Surgeonfish
+### Surgeonfish Recruits
 ```{r, fig.cap= "**Figure 10.**"}
 surgeonfish_young <- young_ci %>% 
   filter(organism == "Surgeonfish") %>% 
@@ -261,7 +261,7 @@ ggplot(data = surgeonfish_young)+
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
-### Coral Trout
+### Coral Trout Recruits
 ```{r, fig.cap= "**Figure 11.**"}
 coral_trout_young <- young_ci %>% 
   filter(organism == "Coral Trout") %>% 
@@ -276,7 +276,7 @@ ggplot(data = coral_trout_young)+
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
-### Spotted Damselfish
+### Spotted Damselfish Recruits
 ```{r, fig.cap= "**Figure 12.**"}
 spotted_damselfish_young <- young_ci %>% 
   filter(organism == "Spotted Damselfish") %>% 
@@ -291,7 +291,7 @@ ggplot(data = spotted_damselfish_young)+
   geom_errorbar(aes(x = location, y = mean_number, ymin = ci_low, ymax = ci_high), width = 0.2)
 ```
 
-### Yellow Damselfish
+### Yellow Damselfish Recruits
 ```{r, fig.cap= "**Figure 13.**"}
 yellow_damselfish_young <- young_ci %>% 
   filter(organism == "Yellow Damselfish") %>% 
