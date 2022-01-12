@@ -309,39 +309,24 @@ ggplot(data = yellow_damselfish_young)+
 
 ## Question 3
 ```{r}
-#Calculate the density of fish recruits per 100 m2 area of reef for each species
+# Calculate the density of fish recruits per 100 m2 area of reef
 
-#SURGEONFISH
-#convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
-surgeonfish_young_100m2 <- surgeonfish_young %>%
-  mutate(mean_density_young = mean_number*mean_number*100) %>% 
-  select(-c(ci_low, ci_high, CI, microhabitat, mean_number))
+young_density_100m2 <- young_ci %>% 
+  mutate(year = as.character(year))
 
-#remove variables from adult surgeonfish data frame
-surgeonfish_adult_100m2 <- surgeonfish_adult %>% 
-  select(-c(ci_low, ci_high, CI))
-
-#merge young and adult data frames
-young_old_surgeonfish <- merge(surgeonfish_adult_100m2, surgeonfish_young_100m2, by = c("year", "location", "organism"))
-
-# calculate r^2 value
-r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
-summary(r2_surgeonfish)$r.squared
-
-#save csv (to double check r^2 value in excel)
-#write.csv(young_old_surgeonfish, here("outputs", "young_old_surgeonfish2.csv"))
+# Convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+young_density_100m2$mean_number_new <- young_density_100m2$mean_number*young_density_100m2$mean_number*100
 ```
 
-### Surgeonfish Plot
+### Surgeonfish
 ```{r}
-#plot surgeonfish young vs old with R^2 value
-ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
+young_density_surgeonfish <- young_density_100m2 %>% 
+  filter(organism == "Surgeonfish")
+
+ggplot(data = young_density_surgeonfish, aes(x = location, y = mean_number_new, color = year))+
   geom_point()+
-  geom_smooth(method = "lm", 
-              se = FALSE, 
-              color = "gray30") + 
-  theme_bw() +
-  annotate("text", x = 100000, y = 350, label = expression(~R^2~"= 0.404"))
+  theme_minimal()+
+  labs(x = "Location", y = "Mean Density of Surgeonfish per 100m^2 reef")
 ```
 
 
@@ -378,11 +363,11 @@ ggplot(data = surgeonfish_adult_microhabitat) +
 coral_trout_adult_microhabitat <- adult_microhabitat %>% 
   filter(organism == "Coral Trout")
 
-ggplot(data = coraltrout_adult_microhabitat) + 
+ggplot(data = coral_trout_adult_microhabitat) + 
   geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
   facet_wrap(~year) +
   theme_minimal() +
-  labs(x = "Location", y = "Mean Density of Coral Trout Per Fine-Branching Coral Area") +
+  labs(x = "Location", y = "Mean Density of Coral Trout Per Coarse-Branching Coral Area") +
   theme(legend.position ="none")
 ```
 
@@ -390,23 +375,28 @@ ggplot(data = coraltrout_adult_microhabitat) +
 ### Spotted Damselfish
 ```{r}
 spotted_damselfish_adult_microhabitat <- adult_microhabitat %>% 
-  filter(organism == "Spotted Damselfish")
+  filter(organism == "Coral Trout")
+
+ggplot(data = spotted_damselfish_adult_microhabitat) + 
+  geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
+  facet_wrap(~year) +
+  theme_minimal() +
+  labs(x = "Location", y = "Mean Density of Spotted Damselfish Per Sea Anemones Coral Area") +
+  theme(legend.position ="none")
+```
+
+
+### Yellow Damselfish
+```{r}
+yellow_damselfish_adult_microhabitat <- adult_microhabitat %>% 
+  filter(organism == "Yellow Damselfish")
 
 ggplot(data = surgeonfish_adult_microhabitat) + 
   geom_col(aes(x = location, y = adult_density_per_microhabitat, fill = location)) + 
   facet_wrap(~year) +
   theme_minimal() +
-  labs(x = "Location", y = "Mean Density of Surgeonfish Per Fine-Branching Coral Area") +
+  labs(x = "Location", y = "Mean Density of Surgeonfish Per Mounding Coral Area") +
   theme(legend.position ="none")
-```
-
-
-
-
-
-### Yellow Damselfish
-```{r}
-
 ```
 
 
