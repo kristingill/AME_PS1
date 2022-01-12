@@ -309,24 +309,39 @@ ggplot(data = yellow_damselfish_young)+
 
 ## Question 3
 ```{r}
-# Calculate the density of fish recruits per 100 m2 area of reef
+#Calculate the density of fish recruits per 100 m2 area of reef for each species
 
-young_density_100m2 <- young_ci %>% 
-  mutate(year = as.character(year))
+#SURGEONFISH
+#convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
+surgeonfish_young_100m2 <- surgeonfish_young %>%
+  mutate(mean_density_young = mean_number*mean_number*100) %>% 
+  select(-c(ci_low, ci_high, CI, microhabitat, mean_number))
 
-# Convert density at 1m2 to density at 100m2 by creating a new column with the old value squared times 100?
-young_density_100m2$mean_number_new <- young_density_100m2$mean_number*young_density_100m2$mean_number*100
+#remove variables from adult surgeonfish data frame
+surgeonfish_adult_100m2 <- surgeonfish_adult %>% 
+  select(-c(ci_low, ci_high, CI))
+
+#merge young and adult data frames
+young_old_surgeonfish <- merge(surgeonfish_adult_100m2, surgeonfish_young_100m2, by = c("year", "location", "organism"))
+
+# calculate r^2 value
+r2_surgeonfish <- lm(mean_density~mean_density_young, data=young_old_surgeonfish)
+summary(r2_surgeonfish)$r.squared
+
+#save csv (to double check r^2 value in excel)
+#write.csv(young_old_surgeonfish, here("outputs", "young_old_surgeonfish2.csv"))
 ```
 
-### Surgeonfish
+### Surgeonfish Plot
 ```{r}
-young_density_surgeonfish <- young_density_100m2 %>% 
-  filter(organism == "Surgeonfish")
-
-ggplot(data = young_density_surgeonfish, aes(x = location, y = mean_number_new, color = year))+
+#plot surgeonfish young vs old with R^2 value
+ggplot(data = young_old_surgeonfish, aes(mean_density_young, mean_density))+
   geom_point()+
-  theme_minimal()+
-  labs(x = "Location", y = "Mean Density of Surgeonfish per 100m^2 reef")
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "gray30") + 
+  theme_bw() +
+  annotate("text", x = 100000, y = 350, label = expression(~R^2~"= 0.404"))
 ```
 
 
