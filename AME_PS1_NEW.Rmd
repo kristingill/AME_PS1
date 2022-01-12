@@ -118,7 +118,7 @@ young_ci[young_ci==0] <- NA
 ## Question 1 - Adult Organisms
 
 ### Sugeonfish
-```{r}
+```{r, fig.cap= "**Figure 1.**"}
 surgeonfish_adult <- adult_ci %>% 
   filter(organism == "Surgeonfish")
 
@@ -132,7 +132,7 @@ ggplot(data = surgeonfish_adult)+
 ```
 
 ### Coral Trout
-```{r}
+```{r, fig.cap= "**Figure 2.**"}
 coral_trout_adult <- adult_ci %>% 
   filter(organism == "Coral Trout")
 
@@ -146,7 +146,7 @@ ggplot(data = coral_trout_adult)+
 ```
 
 ### Spotted Damselfish
-```{r}
+```{r, fig.cap= "**Figure 3.**"}
 spotted_damselfish_adult <- adult_ci %>% 
   filter(organism == "Spotted Damselfish")
 
@@ -160,7 +160,7 @@ ggplot(data = spotted_damselfish_adult)+
 ```
 
 ### Yellow Damselfish
-```{r}
+```{r, fig.cap= "**Figure 4.**"}
 yellow_damselfish_adult <- adult_ci %>% 
   filter(organism == "Yellow Damselfish")
 
@@ -175,7 +175,7 @@ ggplot(data = yellow_damselfish_adult)+
 
 
 ### Mounding Corals
-```{r}
+```{r, fig.cap= "**Figure 5.**"}
 mounding_corals_adult <- adult_ci %>% 
   filter(organism == "Mounding Corals")
 
@@ -189,7 +189,7 @@ ggplot(data = mounding_corals_adult)+
 ```
 
 ### Coarse-Branching Corals
-```{r}
+```{r, fig.cap= "**Figure 6.**"}
 coarse_corals_adult <- adult_ci %>% 
   filter(organism == "Coarse-branching Corals")
 
@@ -203,7 +203,7 @@ ggplot(data = coarse_corals_adult)+
 ```
 
 ### Fine-Branching Corals
-```{r}
+```{r, fig.cap= "**Figure 7.**"}
 fine_corals_adult <- adult_ci %>% 
   filter(organism == "Fine-branching Corals")
 
@@ -217,7 +217,7 @@ ggplot(data = fine_corals_adult)+
 ```
 
 ### Sea Anemones
-```{r}
+```{r, fig.cap= "**Figure 8.**"}
 sea_anemones_adult <- adult_ci %>% 
   filter(organism == "Sea Anemones")
 
@@ -231,7 +231,7 @@ ggplot(data = sea_anemones_adult)+
 ```
 
 ### Algae
-```{r}
+```{r, fig.cap= "**Figure 9.**"}
 algae_adult <- adult_ci %>% 
   filter(organism == "Algae")
 
@@ -247,7 +247,7 @@ ggplot(data = algae_adult)+
 ## Question 2 - Young Recruits
 
 ### Surgeonfish
-```{r}
+```{r, fig.cap= "**Figure 10.**"}
 surgeonfish_young <- young_ci %>% 
   filter(organism == "Surgeonfish") %>% 
   drop_na()
@@ -262,7 +262,7 @@ ggplot(data = surgeonfish_young)+
 ```
 
 ### Coral Trout
-```{r}
+```{r, fig.cap= "**Figure 11.**"}
 coral_trout_young <- young_ci %>% 
   filter(organism == "Coral Trout") %>% 
   drop_na()
@@ -277,7 +277,7 @@ ggplot(data = coral_trout_young)+
 ```
 
 ### Spotted Damselfish
-```{r}
+```{r, fig.cap= "**Figure 12.**"}
 spotted_damselfish_young <- young_ci %>% 
   filter(organism == "Spotted Damselfish") %>% 
   drop_na()
@@ -292,7 +292,7 @@ ggplot(data = spotted_damselfish_young)+
 ```
 
 ### Yellow Damselfish
-```{r}
+```{r, fig.cap= "**Figure 13.**"}
 yellow_damselfish_young <- young_ci %>% 
   filter(organism == "Yellow Damselfish") %>% 
   drop_na()
